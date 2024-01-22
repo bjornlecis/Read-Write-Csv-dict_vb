@@ -15,7 +15,7 @@ def voeg_personeel_lid_toe():
     else:
         naam = input("geef de naam")
         functie = input("geef de functie")
-        loon = int(input("geef het loon van de wn"))
+        loon = float(input("geef het loon van de wn"))
         data[id] = {"Naam":naam,"Functie":functie,"Loon":loon}
 def verwijder_personeelslid():
     toon_alle_data()
@@ -35,7 +35,7 @@ def verhoog_lonen_met_x_procent():
 
         try:
             loon = float(loon_str)
-            personeel["Loon"] = loon * verhogingsfactor
+            personeel["Loon"] = round(loon * verhogingsfactor,2)
         except ValueError:
             print(f"Error: Invalid 'Loon' value for personeel {personeel}. Skipping.")
 
@@ -45,6 +45,7 @@ def verander_functie():
     if id in data.keys():
         functie = input("geef nieuwe functie")
         data[id]["Functie"] = functie
+        data[id]["Loon"] = float(input("geef het nieuwe loon"))
     else:
         print("id niet gevonden")
 
@@ -74,8 +75,9 @@ def update_data_naar_csv():
 
 ###hfd##
 data = lees_data_in()
+toon_alle_data()
+#voeg_personeel_lid_toe()
+#verwijder_personeelslid
 #verhoog_lonen_met_x_procent()
-#toon_alle_data()
-#verander_functie()
-#toon_alle_data()
-sorteer_op_naam()
+verander_functie()
+update_data_naar_csv()
